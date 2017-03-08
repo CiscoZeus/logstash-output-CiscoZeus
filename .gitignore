@@ -1,0 +1,5 @@
+# Bundle locks
+*.lock
+
+# Gems
+*.gem
