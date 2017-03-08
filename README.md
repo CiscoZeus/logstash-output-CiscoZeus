@@ -6,7 +6,7 @@ It is a simple wrapper of the [Ruby Zeus Client](https://github.com/CiscoZeus/ru
 ##Developing
 
 First of all you'll need JRuby, since Logstash is written in ruby and runs on the JVM.
-You can get it [in their website](http://jruby.org/download) or through [RVM](https://rvm.io/) like this:
+You can get it [in their website](http://jruby.org/download) or through [RVM](https://rvm.io/).
 
 ###Building
 
@@ -24,6 +24,8 @@ logstash-plugin install logstash-output-CiscoZeus-0.1.0.gem
 ```
 
 ###Configuration
+
+Add this configuration to the output section of your logstash configuration file.
 
 ```
 output {
