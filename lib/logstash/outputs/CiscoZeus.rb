@@ -14,15 +14,13 @@ class LogStash::Outputs::Ciscozeus < LogStash::Outputs::Base
   
   concurrency :single
 
-  public
   def register
     @zeus_client = Zeus::APIClient.new({
-      :access_token => @token,
-      :endpoint => @endpoint
+      access_token: @token,
+      endpoint: @endpoint
     })
   end # def register
 
-  public
   def multi_receive(events)
     result = @zeus_client.send_logs(@log_name, events)
     if not result.success? 
