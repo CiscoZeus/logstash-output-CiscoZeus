@@ -1,15 +1,15 @@
 Gem::Specification.new do |s|
   s.name          = 'logstash-output-CiscoZeus'
-  s.version       = '0.1.0'
+  s.version       = '0.1.1'
   s.licenses      = ['Apache-2.0']
   s.summary       = 'Logstash plugin to talk with the CiscoZeus HTTP API'
   s.homepage      = 'http://ciscozeus.io'
   s.authors       = ['Yoel Cabo']
-  s.email         = 'ycabolp@gmail.com'
+  s.email         = 'ycabolop@cisco.com'
   s.require_paths = ['lib']
 
   # Files
-  s.files = Dir['lib/**/*','spec/**/*','vendor/**/*','*.gemspec','*.md','Gemfile','LICENSE','NOTICE.TXT']
+  s.files = Dir['lib/**/*', 'vendor/**/*','*.gemspec','*.md','Gemfile','LICENSE']
   
   # Special flag to let us know this is actually a logstash plugin
   s.metadata = { "logstash_plugin" => "true", "logstash_group" => "output" }

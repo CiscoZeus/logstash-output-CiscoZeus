@@ -20,7 +20,7 @@ jruby -S gem build logstash-output-CiscoZeus.gemspec
 ### Installation
 
 ```sh
-logstash-plugin install logstash-output-CiscoZeus-0.1.0.gem
+logstash-plugin install logstash-output-CiscoZeus
 ```
 
 ### Configuration
