@@ -25,6 +25,8 @@ logstash-plugin install logstash-output-CiscoZeus
 
 ### Configuration
 
+#### Logs
+
 Add this configuration to the output section of your logstash configuration file.
 
 ```
@@ -36,6 +38,37 @@ output {
   }
 }
 ```
+
+#### Metrics
+
+The basic configuration is analogous to the Logs plugin
+
+```
+output {
+  CiscoZeusMetrics {
+    token => "my_token"
+    metric_name => "my_desired_log_name"
+    endpoint => "myendpoint.ciscozeus.io"
+  }
+}
+```
+
+With this configuration, the plugin will forward all the numeric fields to Zeus as metrics.
+
+Optionally, you can use `fields` to select a specific set of fields instead. The plugin will try to do a type cast in case you select a non integer field.
+
+```
+output {
+  CiscoZeusMetrics {
+    token => "my_token"
+    metric_name => "my_desired_log_name"
+    endpoint => "myendpoint.ciscozeus.io"
+    fields => ["foo","bar"]
+  }
+}
+```
+
+
 
 ## License and copyright
 
