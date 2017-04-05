@@ -19,7 +19,7 @@ class LogStash::Outputs::Ciscozeusmetrics < LogStash::Outputs::Base
   #   the plugin will try to convert it using ruby type casting.
   config :fields, :validate => :string, :list => true, :default => nil
 
-  concurrency :single
+  concurrency :shared
 
   def register
     @zeus_client = Zeus::APIClient.new({

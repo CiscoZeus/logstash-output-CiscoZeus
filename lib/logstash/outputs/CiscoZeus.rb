@@ -12,7 +12,7 @@ class LogStash::Outputs::Ciscozeus < LogStash::Outputs::Base
   config :endpoint, :validate => :string, :default => "api.ciscozeus.io"
   config :log_name, :validate => :string, :default => "logstash_data"
 
-  concurrency :single
+  concurrency :shared
 
   def register
     @zeus_client = Zeus::APIClient.new({
