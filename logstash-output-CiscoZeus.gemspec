@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = 'logstash-output-CiscoZeus'
-  s.version       = '0.2.0'
+  s.version       = '0.2.1'
   s.licenses      = ['Apache-2.0']
   s.summary       = 'Logstash plugin to talk with the CiscoZeus HTTP API'
   s.homepage      = 'http://ciscozeus.io'

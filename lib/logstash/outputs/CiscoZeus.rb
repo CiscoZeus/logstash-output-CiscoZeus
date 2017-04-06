@@ -12,7 +12,7 @@ class LogStash::Outputs::Ciscozeus < LogStash::Outputs::Base
   config :endpoint, :validate => :string, :default => "api.ciscozeus.io"
   config :log_name, :validate => :string, :default => "logstash_data"
 
-  concurrency :single
+  concurrency :shared
 
   def register
     @zeus_client = Zeus::APIClient.new({
@@ -22,9 +22,11 @@ class LogStash::Outputs::Ciscozeus < LogStash::Outputs::Base
   end # def register
 
   def multi_receive(events)
-    result = @zeus_client.send_logs(@log_name, events)
-    if not result.success?
-      STDERR.puts "Failed to send data to zeus: " + result.data.to_s
+    events.group_by{ |ev| ev.sprintf(@log_name) }.each do |log_name, events_group| 
+      result = @zeus_client.send_logs(log_name, events_group)
+      if not result.success?
+        STDERR.puts "Failed to send data to zeus: " + result.data.to_s
+      end
     end
   end # def receive
 end # class LogStash::Outputs::Ciscozeus

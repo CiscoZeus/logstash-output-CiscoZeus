@@ -19,7 +19,7 @@ class LogStash::Outputs::Ciscozeusmetrics < LogStash::Outputs::Base
   #   the plugin will try to convert it using ruby type casting.
   config :fields, :validate => :string, :list => true, :default => nil
 
-  concurrency :single
+  concurrency :shared
 
   def register
     @zeus_client = Zeus::APIClient.new({
@@ -29,10 +29,12 @@ class LogStash::Outputs::Ciscozeusmetrics < LogStash::Outputs::Base
   end # def register
 
   def multi_receive(events)
-    metrics = events.map{|event| reform(event)}
-    result = @zeus_client.send_metrics(@metric_name, metrics)
-    if not result.success?
-      STDERR.puts "Failed to send data to zeus: " + result.data.to_s
+    events.group_by{ |ev| ev.sprintf(@metric_name) }.each do |metric_name, events_group|
+      metrics = events_group.map{|event| reform(event)}
+      result = @zeus_client.send_metrics(metric_name, metrics)
+      if not result.success?
+        STDERR.puts "Failed to send data to zeus: " + result.data.to_s
+      end
     end
   end # def receive
 
